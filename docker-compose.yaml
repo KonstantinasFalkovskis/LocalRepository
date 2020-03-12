@@ -1,0 +1,22 @@
+version: "3"
+services:
+  registry:
+    image: registry:2
+    restart: always
+    container_name: registry
+    ports:
+      - "5000:5000"
+    volumes:
+      - /mnt/volume/images:/var/lib/registry
+  registry-ui:
+    image: joxit/docker-registry-ui:static
+    container_name: registry-ui
+    restart: always
+    ports:
+      - "80:80"    
+    depends_on:
+      - registry
+    environment:
+      - REGISTRY_URL=http://192.168.0.106:5000
+      - DELETE_IMAGES=true
+      - REGISTRY_TITLE=Local Image Repository
