@@ -1,4 +1,14 @@
-#Local images repository at HIPERION
+# Local images repository at HIPERION
+http://www.vinsguru.com/selenium-docker-integration-through-jenkinsfile-managing-local-docker-registry/
+http://www.testautomationguru.com/selenium-docker-integration-through-jenkinsfile-part-3-executing-tests-inside-docker-container/
+
+NOTE: For starting docker local registry
+https://docs.docker.com/registry/
+1. docker run -d -p 5000:5000 --name registry -v /mnt/volume/images:/var/lib/registry registry:2
+2. docker image tag ubuntu 192.168.0.106:5000/myfirstimage
+3. docker push 192.168.0.106:5000/myfirstimage
+4. docker pull 192.168.0.106:5000/myfirstimage
+5. docker container stop registry && docker container rm -v registry
 
 1. Start local images repository on the server in deamon mode:
    - sudo docker-compose up -d
@@ -28,10 +38,10 @@ update existing file:
 Now each machine in the network is ready to use our Docker-registry.
 
 5. Push to the repository
-- docker push 10.11.12.13:5000/
+- docker push 192.168.0.106:5000/hiperion/tests
 
 6. Pull from the repository
-- docker pull 10.11.12.13:5000/ 
+- docker pull 192.168.0.106:5000/hiperion/tests
 
 7. Pushing to Docker Repository with Jenkins Pepiline
 pipeline {
